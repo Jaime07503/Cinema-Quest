@@ -12,7 +12,7 @@ function App() {
   const debouncedGetMovies = useCallback(
     debounce((search) => {
       getMovies({ search });
-    }, 350),
+    }, 375),
     [getMovies]
   );
 
@@ -34,9 +34,12 @@ function App() {
   return (
     <div className="container d-flex flex-column align-items-center">
       <header className="pt-4 w-100">
-        <h1 className="text-light text-center">CinemaQuest</h1>
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="input-group mb-3">
+        <h1 className="text-light text-center mb-4">CinemaQuest</h1>
+        <form
+          className="form d-flex align-items-center justify-content-center mb-3"
+          onSubmit={handleSubmit}
+        >
+          <div className="input-group">
             <input
               type="text"
               className="form-control"
@@ -49,15 +52,33 @@ function App() {
             <button className="btn btn-outline-secondary" id="button-addon2">
               Buscar
             </button>
-            <input type="checkbox" onChange={handleSort} checked={sort} />
           </div>
         </form>
-        {error && <p className="text-light">{error}</p>}
+        <div className="form-check form-check-reverse mb-4 d-flex justify-content-between">
+          <div>
+            {error && <p className="badge text-bg-warning p-2">{error}</p>}
+          </div>
+          <div>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="reverseCheck1"
+              onChange={handleSort}
+              checked={sort}
+            />
+            <label
+              className="form-check-label text-light"
+              htmlFor="reverseCheck1"
+            >
+              Ordenar Alfabéticamente
+            </label>
+          </div>
+        </div>
       </header>
 
       <main>
         {loading ? (
-          <p className="text-light">Cargando ...</p>
+          <p className="badge text-bg-dark fs-6 p-2">Cargando ...</p>
         ) : (
           <Movies movies={movies} />
         )}

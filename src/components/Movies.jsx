@@ -24,7 +24,11 @@ function ListOfMovies({ movies }) {
 }
 
 function NoMoviesResults() {
-  return <p className="text-light">No se encontraron películas</p>;
+  return (
+    <p className="badge text-bg-secondary fs-6 p-2">
+      No se encontraron películas
+    </p>
+  );
 }
 
 export function Movies({ movies }) {
